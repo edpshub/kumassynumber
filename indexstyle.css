@@ -1,0 +1,283 @@
+:root {
+  --shadow-color: #FF9E9E;
+  --shadow-color-light: white;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: black;
+  overflow: hidden;
+}
+
+/* 背景キャンバス */
+canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* CRTスキャンライン風エフェクト */
+.crt::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 2;
+  animation: flicker 0.15s infinite;
+}
+
+.crt::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 15%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+  z-index: 2;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 1; }
+}
+
+/* ヘッダー（左寄せ） */
+header {
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  z-index: 3;
+
+  background: rgba(148, 148, 148, 0.4);
+  padding: 10px 20px;
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+}
+
+/* 左ロゴ部分 */
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logo-area img {
+  height: 80px;
+}
+
+.logo-area p {
+  font-size:48px;
+  color: white;
+  animation: neon 3s infinite;
+  font-family: "Archivo Black", "Archivo", sans-serif;
+}
+
+/* 中央検索バー */
+.search-area {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  height: 60px;
+  margin-left: 40px;
+}
+
+.search-area input {
+  width: 60%;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 20px 0 0 20px;
+  outline: none;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.search-area button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 0 20px 20px 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+}
+
+.search-area button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 右スペース */
+.right-area {
+  width: 80px; /* 将来用スペース */
+}
+
+
+header img {
+  height: 60px; /* ロゴ画像の高さ */
+  margin-right: 15px;
+}
+
+header p {
+  font-size: 40px;
+  text-transform: uppercase;
+  font-family: "Archivo Black", "Archivo", sans-serif;
+  font-weight: normal;
+  color: white;
+  animation: neon 3s infinite;
+}
+main {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  margin-top: 180px; /* ヘッダー分の余白 */
+}
+
+.table-container {
+  width: 80%;
+  max-height: 500px; /* 高さ制限でスクロール可能に */
+  overflow-y: auto;
+  background: rgba(148, 148, 148, 0.4);
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+  padding: 20px;
+}
+
+/* スクロールバーのデザイン（Chrome, Edge, Safari） */
+.table-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 5px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* テーブルデザイン */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+
+thead th {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  text-align: left;
+  font-size: 18px;
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes neon {
+  0% {
+    text-shadow:
+      -1px -1px 1px var(--shadow-color-light),
+      -1px 1px 1px var(--shadow-color-light),
+      1px -1px 1px var(--shadow-color-light),
+      1px 1px 1px var(--shadow-color-light),
+      0 0 3px var(--shadow-color-light),
+      0 0 10px var(--shadow-color-light),
+      0 0 20px var(--shadow-color-light),
+      0 0 30px var(--shadow-color),
+      0 0 40px var(--shadow-color),
+      0 0 50px var(--shadow-color),
+      0 0 70px var(--shadow-color),
+      0 0 100px var(--shadow-color),
+      0 0 200px var(--shadow-color);
+  }
+  50% {
+    text-shadow:
+      -1px -1px 1px var(--shadow-color-light),
+      -1px 1px 1px var(--shadow-color-light),
+      1px -1px 1px var(--shadow-color-light),
+      1px 1px 1px var(--shadow-color-light),
+      0 0 5px var(--shadow-color-light),
+      0 0 15px var(--shadow-color-light),
+      0 0 25px var(--shadow-color-light),
+      0 0 40px var(--shadow-color),
+      0 0 50px var(--shadow-color),
+      0 0 60px var(--shadow-color),
+      0 0 80px var(--shadow-color),
+      0 0 110px var(--shadow-color),
+      0 0 210px var(--shadow-color);
+  }
+  100% {
+    text-shadow:
+      -1px -1px 1px var(--shadow-color-light),
+      -1px 1px 1px var(--shadow-color-light),
+      1px -1px 1px var(--shadow-color-light),
+      1px 1px 1px var(--shadow-color-light),
+      0 0 3px var(--shadow-color-light),
+      0 0 10px var(--shadow-color-light),
+      0 0 20px var(--shadow-color-light),
+      0 0 30px var(--shadow-color),
+      0 0 40px var(--shadow-color),
+      0 0 50px var(--shadow-color),
+      0 0 70px var(--shadow-color),
+      0 0 100px var(--shadow-color),
+      0 0 200px var(--shadow-color);
+  }
+}
+/* ===== 以下を末尾に追加 ===== */
+
+/* 並び替え可能なテーブルヘッダー */
+table thead th {
+  cursor: pointer;
+  position: relative;
+  user-select: none; /* テキスト選択を無効化 */
+}
+
+/* 並び替え方向を示す矢印（デフォルトは非表示） */
+table thead th::after {
+  content: '';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 4px solid transparent;
+  opacity: 0.5;
+}
+
+/* 昇順（▲） */
+table thead th.sort-asc::after {
+  border-bottom-color: white;
+  margin-top: -2px;
+}
+
+/* 降順（▼） */
+table thead th.sort-desc::after {
+  border-top-color: white;
+  margin-top: 2px;
+}
